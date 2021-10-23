@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 namespace Lazar_Andreea_Maria_Lab2.Controllers
 {
     public class HomeController : Controller
-    {
-        private readonly ILogger<HomeController> _logger;
+    {/*
+        //private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -33,5 +33,6 @@ namespace Lazar_Andreea_Maria_Lab2.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+    }*/
     }
 }
