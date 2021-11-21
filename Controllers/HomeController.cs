@@ -20,6 +20,10 @@ namespace Lazar_Andreea_Maria_Lab2.Controllers
             _context = context;
         }
 
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         public async Task<ActionResult> Statistics()
         {
