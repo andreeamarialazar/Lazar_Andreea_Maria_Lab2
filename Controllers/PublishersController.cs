@@ -11,6 +11,7 @@ using LibraryModel.Models.LibraryViewModels;
 
 namespace Lazar_Andreea_Maria_Lab2.Controllers
 {
+    [Authorize(Policy = "OnlySales")]
     public class PublishersController : Controller
     {
         private readonly LibraryContext _context;
