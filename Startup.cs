@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LibraryModel.Data;
 using Microsoft.EntityFrameworkCore;
+using Lazar_Andreea_Maria_Lab2.Hubs;
 
 namespace Lazar_Andreea_Maria_Lab2
 {
@@ -28,6 +29,7 @@ namespace Lazar_Andreea_Maria_Lab2
             services.AddControllersWithViews();
             services.AddDbContext<LibraryContext>(options =>
  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSignalR();
 
         }
 
@@ -56,6 +58,7 @@ namespace Lazar_Andreea_Maria_Lab2
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<ChatHub>("/chathub");
             });
         }
     }
