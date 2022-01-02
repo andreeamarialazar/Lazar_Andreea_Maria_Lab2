@@ -75,8 +75,8 @@ namespace Lazar_Andreea_Maria_Lab2.Controllers
             return View(new RoleEdit
             {
                 Role = role,
-                Members = members,
-                NonMembers = nonMembers
+                Members = (IEnumerable<IdentityUser>)members,
+                NonMembers = (IEnumerable<IdentityUser>)nonMembers
             });
         }
         [HttpPost]

@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Protos\greet.proto">
+      <GrpcServices>Server</GrpcServices>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />
@@ -28,5 +34,8 @@
   <ItemGroup>
     <ProjectReference Include="..\LibraryModel\LibraryModel.csproj" />
   </ItemGroup>
+	<ItemGroup>
+		<Protobuf Include="Protos\customersCRUD.proto" GrpcServices="Client" />
+	</ItemGroup>
 
 </Project>

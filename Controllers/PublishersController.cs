@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LibraryModel.Data;
 using LibraryModel.Models;
 using LibraryModel.Models.LibraryViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lazar_Andreea_Maria_Lab2.Controllers
 {
