@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using LibraryModel.Data;
 using Microsoft.EntityFrameworkCore;
 using Lazar_Andreea_Maria_Lab2.Hubs;
+using Microsoft.AspNetCore.Identity;
 
 namespace Lazar_Andreea_Maria_Lab2
 {
@@ -30,6 +31,16 @@ namespace Lazar_Andreea_Maria_Lab2
             services.AddDbContext<LibraryContext>(options =>
  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSignalR();
+            services.Configure<IdentityOptions>(options => {
+                // Default Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan =
+                TimeSpan.FromMinutes(5); options.Lockout.MaxFailedAccessAttempts = 3; 
+                options.Lockout.AllowedForNewUsers = true;
+            });
+            services.Configure<IdentityOptions>(options => { // Default Password
+               
+                options.Password.RequiredLength = 6;
+            });
 
         }
 
@@ -50,6 +61,7 @@ namespace Lazar_Andreea_Maria_Lab2
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
@@ -59,6 +71,7 @@ namespace Lazar_Andreea_Maria_Lab2
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHub<ChatHub>("/chathub");
+                endpoints.MapRazorPages();
             });
         }
     }
