@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Lazar_Andreea_Maria_Lab2.Data;
+using LibraryModel.Data;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;

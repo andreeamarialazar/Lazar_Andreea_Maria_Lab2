@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Lazar_Andreea_Maria_Lab2.Data;
-using Lazar_Andreea_Maria_Lab2.Models;
+using LibraryModel.Data;
+using LibraryModel.Models;
 
 namespace Lazar_Andreea_Maria_Lab2.Controllers
 {
@@ -44,25 +44,17 @@ namespace Lazar_Andreea_Maria_Lab2.Controllers
             {
                 books = books.Where(s => s.Title.Contains(searchString));
             }
-            switch (sortOrder)
+            books = sortOrder switch
             {
-                case "title_desc":
-                    books = books.OrderByDescending(b => b.Title);
-                    break;
-                case "Price":
-                    books = books.OrderBy(b => b.Price);
-                    break;
-                case "price_desc":
-                    books = books.OrderByDescending(b => b.Price);
-                    break;
-                default:
-                    books = books.OrderBy(b => b.Title);
-                    break;
-            }
+                "title_desc" => books.OrderByDescending(b => b.Title),
+                "Price" => books.OrderBy(b => b.Price),
+                "price_desc" => books.OrderByDescending(b => b.Price),
+                _ => books.OrderBy(b => b.Title),
+            };
             int pageSize = 2;
             return View(await PaginatedList<Book>.CreateAsync(books.AsNoTracking(), pageNumber ??
            1, pageSize));
-            return View(await books.AsNoTracking().ToListAsync());
+            //return View(await books.AsNoTracking().ToListAsync());
         }
 
         // GET: Books/Details/5
@@ -207,7 +199,7 @@ namespace Lazar_Andreea_Maria_Lab2.Controllers
             catch (DbUpdateException /* ex */)
             {
 
-                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+                return RedirectToAction(nameof(Delete), new { id, saveChangesError = true });
             }
         }
 

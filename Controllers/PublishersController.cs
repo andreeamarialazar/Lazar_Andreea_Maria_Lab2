@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Lazar_Andreea_Maria_Lab2.Data;
-using Lazar_Andreea_Maria_Lab2.Models;
-using Lazar_Andreea_Maria_Lab2.Models.LibraryViewModels;
+using LibraryModel.Data;
+using LibraryModel.Models;
+using LibraryModel.Models.LibraryViewModels;
 
 namespace Lazar_Andreea_Maria_Lab2.Controllers
 {
@@ -23,15 +23,17 @@ namespace Lazar_Andreea_Maria_Lab2.Controllers
         // GET: Publishers
         public async Task<IActionResult> Index(int? id, int? bookID)
         {
-            var viewModel = new PublisherIndexData();
-            viewModel.Publishers = await _context.Publishers
+            var viewModel = new PublisherIndexData
+            {
+                Publishers = await _context.Publishers
             .Include(i => i.PublishedBooks)
             .ThenInclude(i => i.Book)
             .ThenInclude(i => i.Orders)
             .ThenInclude(i => i.Customer)
             .AsNoTracking()
             .OrderBy(i => i.PublisherName)
-            .ToListAsync();
+            .ToListAsync()
+            };
             if (id != null)
             {
                 ViewData["PublisherID"] = id.Value;
